@@ -1,12 +1,25 @@
-import express from "express";
+import express from "express"
+import dotenv from "dotenv"
+
+import authRoutes from "./routes/auth.route.js"
+import { connectToDB } from "./lib/db.js"
+
+dotenv.config()
+
 const app = express()
 
-const PORT = 5001;
+const PORT = process.env.PORT
 
-app.get('/', (req, res) => {
-    res.send("server is up and running")
+// For Authentication
+app.use('/api/auth', authRoutes)
+
+// For checking the health status
+app.get('/', (_req, res) => {
+    res.json({ success: true, message: "Server is up and running." })
 })
 
+
 app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    connectToDB()
+    console.log(`Server is running at http://localhost:${PORT}`)
 })
