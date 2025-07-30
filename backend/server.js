@@ -9,11 +9,11 @@ dotenv.config()
 const app = express()
 
 const PORT = process.env.PORT
+app.use(express.json())
 
 // For Authentication
 app.use('/api/auth', authRoutes)
 
-app.use(express.json())
 
 // For checking the health status
 app.get('/', (_req, res) => {

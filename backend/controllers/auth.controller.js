@@ -7,6 +7,10 @@ export const signup = async (req, res) => {
     }
 
     try {
+        const existingUser = await User.findOne({ email })
+        if (existingUser) {
+            return res.status(400).json({ success: false, message: "User already exists." })
+        }
         const newUser = new User({ email, password, name })
         await newUser.save()
         res.status(201).json({ success: true, message: "User created successfully." })
