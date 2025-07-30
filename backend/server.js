@@ -25,3 +25,4 @@ app.listen(PORT, () => {
     connectToDB()
     console.log(`Server is running at http://localhost:${PORT}`)
 })
+  
