@@ -13,6 +13,8 @@ const PORT = process.env.PORT
 // For Authentication
 app.use('/api/auth', authRoutes)
 
+app.use(express.json())
+
 // For checking the health status
 app.get('/', (_req, res) => {
     res.json({ success: true, message: "Server is up and running." })
